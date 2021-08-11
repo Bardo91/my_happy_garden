@@ -4,10 +4,11 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class CalendarEvent {
-  CalendarEvent({required this.name, required this.from, required this.to});
-  String name = "";
-  DateTime from = new DateTime(2021);
-  DateTime to = new DateTime(2021);
+  CalendarEvent({required this.name, required this.from, required this.to, required this.color});
+  String name;
+  DateTime from;
+  DateTime to;
+  Color color;
 
   @override
   String toString() => name+from.toString(); // Just for print()
@@ -21,7 +22,8 @@ class CalendarEventAdapter extends TypeAdapter<CalendarEvent> {
   CalendarEvent read(BinaryReader reader) {
     return CalendarEvent(name:reader.readString(), 
                         from:DateTime.parse(reader.readString()),
-                        to:DateTime.parse(reader.readString()));
+                        to:DateTime.parse(reader.readString()),
+                        color: Color(reader.readInt32()));
   }
 
   @override
@@ -29,6 +31,7 @@ class CalendarEventAdapter extends TypeAdapter<CalendarEvent> {
     writer.writeString(event.name);
     writer.writeString(event.from.toString());
     writer.writeString(event.to.toString());
+    writer.writeInt32(event.color.value);
   }
 }
 
@@ -65,7 +68,7 @@ class CalendarDatabase{
         Meeting(  value.name, 
                   value.from,
                   value.to,
-                  Color(0xFF0F8644), 
+                  value.color, 
                   true)
       ); 
     });
@@ -75,7 +78,8 @@ class CalendarDatabase{
   void insertEvent(Meeting event) {
     var hiveEvent =  CalendarEvent( name: event.eventName, 
                                     from: event.from, 
-                                    to: event.to);
+                                    to: event.to,
+                                    color: event.background);
     _database?.add(hiveEvent);
   }
 

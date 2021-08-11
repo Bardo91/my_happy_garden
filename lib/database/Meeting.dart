@@ -67,13 +67,4 @@ class Meeting {
 
   /// IsAllDay which is equivalent to isAllDay property of [Appointment].
   bool isAllDay;
-
-  Map<String, Object?> toMap() {
-    var map = <String, Object?>{
-      "name": this.eventName,
-      "from": from.toString(),
-      "to": to.toString(),
-    };
-    return map;
-  }
 }
