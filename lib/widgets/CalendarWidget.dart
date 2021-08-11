@@ -41,11 +41,10 @@ class _CalendarWidgetState extends State<CalendarWidget> {
         body: SfCalendar(
         view: CalendarView.month,
         dataSource: MeetingDataSource(meetings),
-        // by default the month appointment display mode set as Indicator, we can
-        // change the display mode as appointment using the appointment display
-        // mode property
         monthViewSettings: const MonthViewSettings( appointmentDisplayMode: MonthAppointmentDisplayMode.appointment),
         onLongPress: (CalendarLongPressDetails details) => _showMyDialog(details),
+        appointmentTextStyle: TextStyle(  fontSize: 12, 
+                                          color: Colors.black87),
       )
     );
   }
