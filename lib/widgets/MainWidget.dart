@@ -15,7 +15,7 @@ class MainWidget extends StatefulWidget {
 class _MainWidgetState extends State<MainWidget> {
   List<CollapsibleItem> _items = [];
   String _userName = "Unknown";
-  AssetImage _avatarImg = AssetImage('unknown_user.png');
+  AssetImage _avatarImg = AssetImage('assets/unknown_user.png');
 
   CalendarWidget _calendar = CalendarWidget();
 
