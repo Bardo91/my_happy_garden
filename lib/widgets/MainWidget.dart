@@ -1,9 +1,10 @@
 import 'dart:math' as math show pi;
 
 import 'package:collapsible_sidebar/collapsible_sidebar.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:my_happy_garden/widgets/AlbumWidget.dart';
 import 'package:my_happy_garden/widgets/CalendarWidget.dart';
+import 'package:my_happy_garden/widgets/WikiWidget.dart';
 
 enum MenuOptions {Calendar, Wiki, Album}
 
@@ -18,6 +19,8 @@ class _MainWidgetState extends State<MainWidget> {
   AssetImage _avatarImg = AssetImage('assets/unknown_user.png');
 
   CalendarWidget _calendar = CalendarWidget();
+  WikiWidget _wiki = WikiWidget();
+  AlbumWidget _album = AlbumWidget();
 
   MenuOptions _currentMenu = MenuOptions.Calendar;
 
@@ -78,10 +81,16 @@ class _MainWidgetState extends State<MainWidget> {
 
     switch (_currentMenu) {
       case MenuOptions.Calendar:
-        Widget widget = _calendar;    
+        widget = _calendar;    
+        break;
+      case MenuOptions.Wiki:
+        widget = _wiki;    
+        break;
+      case MenuOptions.Album:
+        widget = _album;    
         break;
       default:
-        Widget widget = _calendar;
+        widget = _calendar;
     }
     return Container(
       height: double.infinity,
