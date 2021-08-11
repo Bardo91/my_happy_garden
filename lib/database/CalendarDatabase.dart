@@ -36,10 +36,18 @@ class CalendarEventAdapter extends TypeAdapter<CalendarEvent> {
 }
 
 class CalendarDatabase{
+  /// Static interface
+  static const int DATABASE_VERSION = 1;
+  static const String DATABASE_NAME = "calendar.db";
 
-  final int DATABASE_VERSION = 1;
-  final String DATABASE_NAME = "calendar.db";
+  static final CalendarDatabase _singleton = CalendarDatabase._internal();
+  CalendarDatabase._internal();
 
+  factory CalendarDatabase() {
+    return _singleton;
+  }
+
+  /// Object interface
   bool _isOpen = false;
   Box<CalendarEvent>? _database;
 
@@ -48,16 +56,17 @@ class CalendarDatabase{
   }
 
   Future<bool> open() async{
-    await Hive.initFlutter();
-    Hive.registerAdapter(CalendarEventAdapter());
+    if(!_isOpen){
+      await Hive.initFlutter();
+      Hive.registerAdapter(CalendarEventAdapter());
 
-    _database = await Hive.openBox(DATABASE_NAME);
-    if(!_database!.isOpen){
-      _isOpen = false;
-      return false;
+      _database = await Hive.openBox(DATABASE_NAME);
+      if(!_database!.isOpen){
+        _isOpen = false;
+        return false;
+      }
+      _isOpen = true;
     }
-
-
     return _isOpen;
   }
 
