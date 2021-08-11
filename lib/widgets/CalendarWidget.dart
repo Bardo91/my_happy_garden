@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:multi_select_flutter/multi_select_flutter.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 /// The hove page which hosts the calendar
@@ -11,6 +12,9 @@ class CalendarWidget extends StatefulWidget {
 }
 
 class _CalendarWidgetState extends State<CalendarWidget> {
+  List<Meeting> meetings = <Meeting>[];
+  List<String> _actions = [ 'Regar', 'Abonar', 'Podar' ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,20 +24,42 @@ class _CalendarWidgetState extends State<CalendarWidget> {
         // by default the month appointment display mode set as Indicator, we can
         // change the display mode as appointment using the appointment display
         // mode property
-        monthViewSettings: const MonthViewSettings(
-            appointmentDisplayMode: MonthAppointmentDisplayMode.appointment),
+        monthViewSettings: const MonthViewSettings( appointmentDisplayMode: MonthAppointmentDisplayMode.appointment),
+        onLongPress: (CalendarLongPressDetails details) => _showMyDialog(details),
       )
     );
   }
 
+  void _showMyDialog(final CalendarLongPressDetails details) {
+    if(details.appointments!.length != 0){
+
+    }else{
+        List<String> _selectedActions = [];
+
+        showDialog(
+          context: context,
+          builder: (ctx) {
+            return  MultiSelectDialog(
+              items: _actions.map((e) => MultiSelectItem(e, e)).toList(),
+              initialValue: _selectedActions,
+              onConfirm: (values) {
+                _selectedActions = values.map((e) => e.toString()).toList();
+                setState(() {
+                  _selectedActions.forEach((action) {
+                    final DateTime startTime = DateTime(details.date!.year, details.date!.month, details.date!.day, 9, 0, 0);
+                    final DateTime endTime = startTime.add(const Duration(minutes: 10));
+                    meetings.add(Meeting(action, startTime, endTime, const Color(0xFF0F8644), true));
+                  });
+                });
+              },
+            );
+          },
+        );      
+    }
+    
+  }
+
   List<Meeting> _getDataSource() {
-    final List<Meeting> meetings = <Meeting>[];
-    final DateTime today = DateTime.now();
-    final DateTime startTime =
-        DateTime(today.year, today.month, today.day, 9, 0, 0);
-    final DateTime endTime = startTime.add(const Duration(hours: 2));
-    meetings.add(Meeting(
-        'Conference', startTime, endTime, const Color(0xFF0F8644), false));
     return meetings;
   }
 }
