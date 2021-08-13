@@ -71,7 +71,7 @@ class _WikiWidgetState extends State<WikiWidget> {
                 ),
               ]
             ),
-            child: Column(
+            child: SingleChildScrollView(child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Text(title,style: TextStyle(fontSize: 22,fontWeight: FontWeight.w600),),
@@ -87,7 +87,7 @@ class _WikiWidgetState extends State<WikiWidget> {
                       child: Text("Close",style: TextStyle(fontSize: 18),)),
                 ),
               ],
-            ),
+            ),)
           ),
           Positioned(
             left: ctPadding,

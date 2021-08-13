@@ -165,9 +165,11 @@ class _MainWidgetState extends State<MainWidget> {
                                   TextButton(
                                     child: const Text('Change'),
                                     onPressed: () {
-                                      _userName = _textFieldController.text;
-                                      _userData.userName = _userName;
-                                      Navigator.of(context).pop();
+                                      if(_textFieldController.text.length > 4){
+                                        _userName = _textFieldController.text;
+                                        _userData.userName = _userName;
+                                        Navigator.of(context).pop();
+                                      }
                                     },
                                   ),
                                 ],
