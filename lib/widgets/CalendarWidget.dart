@@ -21,7 +21,6 @@ class CalendarWidget extends StatefulWidget {
 }
 
 class _CalendarWidgetState extends State<CalendarWidget> {
-  List<Meeting> meetings = <Meeting>[];
   List<AvailableActions> _actions = [ AvailableActions(name: 'Regar', color: Color(0xFF3AB0FB)), 
                                       AvailableActions(name: 'Abonar', color: Color(0xFF71FF8C)), 
                                       AvailableActions(name: 'Podar', color: Color(0xFFFA7D6D)) ];
@@ -30,7 +29,6 @@ class _CalendarWidgetState extends State<CalendarWidget> {
   _CalendarWidgetState(){
     _db.open().then((value) {
       setState(() {
-        meetings = _db.getEvents();
       });
     });
   }
@@ -40,16 +38,26 @@ class _CalendarWidgetState extends State<CalendarWidget> {
     return Scaffold(
         body: SfCalendar(
         view: CalendarView.month,
-        dataSource: MeetingDataSource(meetings),
-        monthViewSettings: const MonthViewSettings( appointmentDisplayMode: MonthAppointmentDisplayMode.appointment),
-        onLongPress: (CalendarLongPressDetails details) => _showMyDialog(details),
-        appointmentTextStyle: TextStyle(  fontSize: 12, 
+        dataSource: MeetingDataSource(_db.getEvents()),
+        monthViewSettings: const MonthViewSettings( 
+          appointmentDisplayMode: MonthAppointmentDisplayMode.appointment,
+          numberOfWeeksInView: 3),
+        onLongPress: (CalendarLongPressDetails details) {
+          if(details.targetElement == CalendarElement.calendarCell){
+            _createEventsDialog(details);
+          }else{
+            Meeting meeting = details.appointments?.first;
+            _db.removeEvent(meeting);
+            setState(() { });
+          }
+        },
+        appointmentTextStyle: TextStyle(  fontSize: 24, 
                                           color: Colors.black87),
       )
     );
   }
 
-  void _showMyDialog(final CalendarLongPressDetails details) {
+  void _createEventsDialog(final CalendarLongPressDetails details) {
     if(details.appointments!.length != 0){
 
     }else{
@@ -68,7 +76,6 @@ class _CalendarWidgetState extends State<CalendarWidget> {
                     final DateTime startTime = DateTime(details.date!.year, details.date!.month, details.date!.day, 9, 0, 0);
                     final DateTime endTime = startTime.add(const Duration(minutes: 10));
                     final Meeting meeting = Meeting(action.name, startTime, endTime, action.color, true);
-                    meetings.add(meeting);
                     _db.insertEvent(meeting);
                   });
                 });

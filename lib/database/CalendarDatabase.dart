@@ -91,4 +91,17 @@ class CalendarDatabase{
     _database?.add(hiveEvent);
   }
 
+  void removeEvent(Meeting event){
+    
+    dynamic? keyToRemove;
+    var all = _database?.toMap().forEach((key, value) {
+      if( value.name == event.eventName &&
+          value.from == event.from &&
+          value.to == event.to ){
+            keyToRemove = key;
+      }
+    });
+    _database?.delete(keyToRemove);
+  }
+
 }
