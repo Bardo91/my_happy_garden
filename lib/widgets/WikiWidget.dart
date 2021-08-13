@@ -20,8 +20,6 @@ class WikiWidget extends StatefulWidget {
 }
 
 class _WikiWidgetState extends State<WikiWidget> {
-  static const double ctPadding = 20;
-  static const double ctAvatarRadius = 45;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -53,6 +51,8 @@ class _WikiWidgetState extends State<WikiWidget> {
   }
 
   void openDialog(final Image image, final String title, final String description){
+    final double ctPadding = 20;
+    final double ctAvatarRadius = 45;
     showDialog(context: context, builder: (ctx) {
       return Stack(
       children: <Widget>[

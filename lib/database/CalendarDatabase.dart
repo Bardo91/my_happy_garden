@@ -37,7 +37,6 @@ class CalendarEventAdapter extends TypeAdapter<CalendarEvent> {
 
 class CalendarDatabase{
   /// Static interface
-  static const int DATABASE_VERSION = 1;
   static const String DATABASE_NAME = "calendar.db";
 
   static final CalendarDatabase _singleton = CalendarDatabase._internal();
