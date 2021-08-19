@@ -33,12 +33,14 @@ dependencies:
   chips_choice: ^2.0.1
   multi_select_flutter: ^4.0.0
   flutter_chip_choice: ^2.0.2
-  sqflite: ^2.0.0+3
   path_provider: ^2.0.2
   hive: ^2.0.4
   hive_flutter: ^1.1.0
   hive_generator: ^1.1.0
   flutter_staggered_grid_view: ^0.4.0
+  cached_network_image: ^3.1.0
+  sqlite3: ^1.1.2
+  sqlite3_flutter_libs: ^0.5.0
 
 dev_dependencies:
   flutter_test:
