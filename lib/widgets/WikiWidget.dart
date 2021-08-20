@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_happy_garden/database/WikiDatabase.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:image/image.dart';
+
 class WikiWidget extends StatefulWidget {
   WikiWidget({Key? key}) : super(key: key);
 
@@ -25,26 +26,24 @@ class _WikiWidgetState extends State<WikiWidget> {
     return Container(
         child: GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          crossAxisSpacing: 20,
-          mainAxisSpacing: 20),
+          crossAxisCount: 3, crossAxisSpacing: 20, mainAxisSpacing: 20),
       itemCount: _entries.length,
       itemBuilder: (BuildContext ctx, index) {
         return GestureDetector(
             child: Container(
               child: Card(
                 child: Column(
-                children: [
-                  AspectRatio(
-                    aspectRatio: 2,
-                    child: CachedNetworkImage(
-                        placeholder: (context, url) => CircularProgressIndicator(),
-                        imageUrl: _entries[index].image,
-                      )
-                  ),
-                  Text(_entries[index].title + "\n"),
-                ],
-              ),
+                  children: [
+                    AspectRatio(
+                        aspectRatio: 2,
+                        child: CachedNetworkImage(
+                          placeholder: (context, url) =>
+                              CircularProgressIndicator(),
+                          imageUrl: _entries[index].image,
+                        )),
+                    Text(_entries[index].title + "\n"),
+                  ],
+                ),
               ),
             ),
             onTap: () => openDialog(
