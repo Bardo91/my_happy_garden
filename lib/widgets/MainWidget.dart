@@ -7,6 +7,7 @@ import 'package:my_happy_garden/database/UserData.dart';
 import 'package:my_happy_garden/widgets/AlbumWidget.dart';
 import 'package:my_happy_garden/widgets/CalendarWidget.dart';
 import 'package:my_happy_garden/widgets/WikiWidget.dart';
+import 'package:my_happy_garden/widgets/GardenWidget.dart';
 
 enum MenuOptions { Calendar, Wiki, Garden, Album }
 
@@ -22,6 +23,7 @@ class _MainWidgetState extends State<MainWidget> {
   CalendarWidget _calendar = CalendarWidget();
   WikiWidget _wiki = WikiWidget();
   AlbumWidget _album = AlbumWidget();
+  GardenWidget _garden = GardenWidget();
 
   MenuOptions _currentMenu = MenuOptions.Calendar;
 
@@ -102,7 +104,7 @@ class _MainWidgetState extends State<MainWidget> {
         widget = _wiki;
         break;
       case MenuOptions.Garden:
-        widget = _album;
+        widget = _garden;
         break;
       case MenuOptions.Album:
         widget = _album;
