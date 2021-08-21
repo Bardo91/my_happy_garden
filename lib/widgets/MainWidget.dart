@@ -8,7 +8,7 @@ import 'package:my_happy_garden/widgets/AlbumWidget.dart';
 import 'package:my_happy_garden/widgets/CalendarWidget.dart';
 import 'package:my_happy_garden/widgets/WikiWidget.dart';
 
-enum MenuOptions { Calendar, Wiki, Album }
+enum MenuOptions { Calendar, Wiki, Garden, Album }
 
 class MainWidget extends StatefulWidget {
   @override
@@ -55,6 +55,11 @@ class _MainWidgetState extends State<MainWidget> {
         onPressed: () => setState(() => _currentMenu = MenuOptions.Wiki),
       ),
       CollapsibleItem(
+        text: 'My garden',
+        icon: Icons.emoji_nature,
+        onPressed: () => setState(() => _currentMenu = MenuOptions.Garden),
+      ),
+      CollapsibleItem(
         text: 'Album',
         icon: Icons.photo_library,
         onPressed: () => setState(() => _currentMenu = MenuOptions.Album),
@@ -95,6 +100,9 @@ class _MainWidgetState extends State<MainWidget> {
         break;
       case MenuOptions.Wiki:
         widget = _wiki;
+        break;
+      case MenuOptions.Garden:
+        widget = _album;
         break;
       case MenuOptions.Album:
         widget = _album;
