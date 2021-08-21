@@ -26,7 +26,7 @@ class _WikiWidgetState extends State<WikiWidget> {
     return Container(
         child: GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3, crossAxisSpacing: 20, mainAxisSpacing: 20),
+          crossAxisCount: 2, crossAxisSpacing: 3, mainAxisSpacing: 3),
       itemCount: _entries.length,
       itemBuilder: (BuildContext ctx, index) {
         return GestureDetector(
@@ -41,7 +41,7 @@ class _WikiWidgetState extends State<WikiWidget> {
                               CircularProgressIndicator(),
                           imageUrl: _entries[index].image,
                         )),
-                    Text(_entries[index].title + "\n"),
+                    Text(_entries[index].title + "\n",textAlign: TextAlign.center,),
                   ],
                 ),
               ),

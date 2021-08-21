@@ -60,7 +60,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/unknown_user.png
+    - assets/images/users/unknown_user.png
     - assets/images/wiki/tomatera.jpg
     - assets/images/wiki/pimiento.jpg
     - assets/images/users/user_image_0.png

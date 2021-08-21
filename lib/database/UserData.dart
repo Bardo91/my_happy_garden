@@ -45,11 +45,11 @@ class UserData{
   }
 
   String get userImage{
-    return _database?.get('image')==null?"":_database?.get('image');
+    return _database?.get('image')==null?"assets/images/users/unknown_user.png":_database?.get('image');
   }
 
   String get userName{
-    return _database?.get('name')==null?"":_database?.get('name');
+    return _database?.get('name')==null?"Unknown":_database?.get('name');
   }
 
   // Private members
