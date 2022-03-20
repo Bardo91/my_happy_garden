@@ -1,6 +1,3 @@
-import 'package:my_happy_garden/database/Meeting.dart';
-import 'package:flutter/widgets.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 
@@ -69,7 +66,7 @@ class GardenDatabase{
 
   List<PlantData> getPlants(){
     List<PlantData> plants = [];
-    var all = _database?.toMap().forEach((key, value) {
+    _database?.toMap().forEach((key, value) {
       plants.add(value);
     });
     return plants;

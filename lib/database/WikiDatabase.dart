@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:http/http.dart' as http;
 
 class WikiEntry {
@@ -32,8 +31,6 @@ class WikiDatabase{
   Future<bool> open() async{
     if(_isOpen)
       return true;
-    
-    String dbPath = DATABASE_NAME;// join(applicationDirectory.path, DATABASE_NAME);
 
     final response = await http.get(Uri.parse(DATABASE_URL));
 

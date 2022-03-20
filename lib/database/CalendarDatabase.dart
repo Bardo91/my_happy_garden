@@ -1,6 +1,5 @@
 import 'package:my_happy_garden/database/Meeting.dart';
 import 'package:flutter/widgets.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class CalendarEvent {
@@ -71,7 +70,7 @@ class CalendarDatabase{
 
   List<Meeting> getEvents(){
     List<Meeting> events = [];
-    var all = _database?.toMap().forEach((key, value) {
+    _database?.toMap().forEach((key, value) {
       events.add(
         Meeting(  value.name, 
                   value.from,
@@ -93,8 +92,8 @@ class CalendarDatabase{
 
   void removeEvent(Meeting event){
     
-    dynamic? keyToRemove;
-    var all = _database?.toMap().forEach((key, value) {
+    dynamic keyToRemove;
+    _database?.toMap().forEach((key, value) {
       if( value.name == event.eventName &&
           value.from == event.from &&
           value.to == event.to ){

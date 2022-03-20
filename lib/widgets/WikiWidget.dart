@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_happy_garden/database/WikiDatabase.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:image/image.dart';
 
 class WikiWidget extends StatefulWidget {
   WikiWidget({Key? key}) : super(key: key);
